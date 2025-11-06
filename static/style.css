@@ -1,0 +1,495 @@
+/* ========== GLOBAL STYLES ========== */
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(160deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+a:hover {
+  color: #11cb77;
+  transform: scale(1.05);
+}
+
+/* ========== NAVIGATION ========== */
+.navigation {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navigation ul {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 20px;
+}
+
+.navigation li {
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.navigation li:hover {
+  background: linear-gradient(140deg, #11cb77, #257bfc);
+}
+
+.navigation a {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.tambah a i {
+  font-size: 22px;
+  color: #11cb77;
+  transition: transform 0.3s ease;
+}
+
+.tambah a i:hover {
+  transform: rotate(180deg);
+  color: #19ff9e;
+}
+ /* SearchBar.css */
+
+ .search-btn{
+  margin-right: 10px;
+  border-radius: 20px;
+ }
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    max-width: 400px;
+    margin: 5px ; /* Center the search bar */
+    background-color: #f1f1f1; /* Background for the container */
+    border-radius: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.search-bar-container:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.search-bar-container i {
+    font-size: 20px;
+    color: #888;
+    margin-right: 5px;
+}
+
+.search-bar {
+    flex-grow: 1;
+    border: none;
+    background: none;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    border-radius: 20px;
+    
+}
+
+.search-bar::placeholder {
+    color: #aaa;
+}
+
+.search-bar:focus {
+    box-shadow: 0 0 5px 2px rgba(0, 123, 255, 0.5);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .search-bar-container {
+      margin-right: 10px;
+        width: 100%; /* Make the search bar more responsive on smaller screens */
+    }
+    .search-bar{
+      width: 10%;
+    }
+
+}
+
+  /* tokoList.css */
+.toko-list {
+    display: grid;
+    grid-template-columns: repeat(5, 3fr);
+    gap: 15px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .toko-app h1{
+    color: white;
+display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+  }
+
+
+  @media (max-width: 1200px) {
+    .toko-list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .toko-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .toko-list {
+      grid-template-columns: repeat(2, 1fr); 
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .toko-list {
+      grid-template-columns: 1fr; 
+    }
+  }
+  
+  .toko-item {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    height: 450px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    overflow: hidden; 
+    background: #fff;
+    position: relative; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .toko-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+  }
+  
+  .toko-item img {
+    height: 60%;
+    width: 100%;
+    overflow: hidden;
+  }
+ 
+  
+  .toko-item_body {
+    display: flex;
+    height: 30%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .toko-item_body .name {
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: bold; 
+    margin: 0;
+  }
+  
+  .toko-item_body .spec {
+    font-size: 0.9em;
+    color: #555; 
+    margin: 5px 0; 
+    white-space: pre-wrap; 
+    font-family: monospace; 
+  }
+  
+  .toko-item_body .harga {
+    font-size: 0.85em;
+    color: #007bff;; 
+    
+    }
+  
+  .toko-item__delete {
+    position: absolute;
+    margin: 0;
+    bottom: 10px; 
+    right: 15px; 
+    width: 30px; 
+    height: 30px; 
+    background: linear-gradient(135deg, #cb1111, #2575fc); 
+    color: #fff; 
+    border: none;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease; 
+  }
+  
+  .toko-item__delete:hover {
+    background: #ff2d2d; 
+    transform: scale(1.1); 
+  }
+  
+  .toko-item__delete svg {
+    width: 18px;
+    height: 18px; 
+  }
+.toko-edit{
+  position: absolute;
+  padding: 0;
+  bottom: 10px; 
+  left: 25px; 
+  width: 50%; 
+  height: 30px; 
+  background: linear-gradient(160deg, #0f2027, #203a43, #2c5364);
+  color: #fff; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease; 
+}
+
+  h2 {
+    font-size: 1.5em;
+    color: rgb(255, 255, 255) ;
+    margin-left: 15px; 
+  }
+  
+
+textarea {
+    white-space: pre-warp;
+}
+
+pre{
+    white-space: pre-warp;
+}
+
+.harga{
+    border-radius: 2px solid black;
+}
+
+  /* tokoInput.css */
+.toko-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2em;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .toko-input input, .toko-input textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  .toko-input input:focus, .toko-input textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .toko-input button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .toko-input button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  /* AddPage.css */
+.add-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 10vh;
+   
+    color: white;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .add-page h2 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
+  }
+  
+  .droptoko{
+    margin: 5px; 
+  }
+
+  .droptoko .dropdown-menu{
+    background-color: #333;
+  }
+
+  .droptoko a{
+    color: #ffffff;
+    margin: 0;
+   
+  }
+
+  .droptoko li{
+    text-align: center;
+    justify-content: center;
+  }
+
+  .droptoko button{
+    width: 220px;
+    font-size: small;
+    background-color: #333;
+  }
+
+  header{
+    display: flex;
+  }
+  .dropdown-container{
+    justify-content: flex-start;
+    width: 70%;
+  }
+
+  .search-container{
+    text-align: right;
+    width: 30%;
+  }
+
+  .about-page {
+    color: #fff;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.about-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.about-container p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.team-section {
+    margin-top: 50px;
+}
+
+.team-section h2 {
+    font-size: 2em;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.edit-page h2{
+  text-align: center;
+}
+
+.filter-form{
+  height: auto;
+  margin-top: 20px;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 20px;
+  max-height: 1000px;
+  border-radius: 10px;
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+}
+
+.form-group{
+  padding-top: 15px;
+  justify-content: center;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-form button{
+  margin-bottom: 15px;
+  padding-left: 20%;
+  padding-right: 20%;
+  align-items: center;
+}
+
+.form-control{
+  min-width: 350px; 
+  max-width: 100%;
+  overflow: hidden;
+  border: solid black 1px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.detail-toko{
+  display: flex;
+  justify-content: center;
+}
+
+.button-detail{
+  cursor: pointer;
+  min-width: 100px;
+  height: 30px; 
+  background: linear-gradient(140deg, #11cb77, #257bfc); 
+  color: #fff; 
+}
+
+.kembali button{
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 30px;
+  width: 10%;
+  height: 100%;
+  padding: 0;
+  background-color: #ff0000;
+  color: white;
+  font-size: 16px;
+}

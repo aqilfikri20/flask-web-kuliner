@@ -1,0 +1,15 @@
+{% extends "index.html" %} {% block content %}
+<section class="add-page">
+  <h1>DAFTAR ADMIN</h1>
+  <h3>Silakan isi data untuk membuat akun admin</h3>
+  {% if error %}
+  <div class="alert alert-danger">{{ error }}</div>
+  {% endif %}
+
+  <form class="toko-input" method="POST">
+    <input type="email" name="email" placeholder="Email Anda" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button type="submit">Daftar</button>
+  </form>
+</section>
+{% endblock %}

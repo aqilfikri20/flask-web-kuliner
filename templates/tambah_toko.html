@@ -1,0 +1,20 @@
+{% extends "index.html" %} {% block content %}
+<section class="add-page">
+  <h2>Tambah Toko Kuliner</h2>
+  <form
+    class="toko-input"
+    action="/toko"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <input type="text" name="nama_toko" placeholder="Nama" required />
+    <input type="text" name="lokasi" placeholder="Lokasi" required />
+ 
+    <div>
+      <label>Pilih Gambar Toko </label>
+      <input type="file" name="img" id="fileInput" class="form-control" />
+    </div>
+    <input type="submit" name="submit" class="btn btn-success" value="UPLOAD" />
+  </form>
+</section>
+{% endblock %}

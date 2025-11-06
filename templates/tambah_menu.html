@@ -1,0 +1,26 @@
+{% extends "index.html" %} {% block content %}
+<section class="add-page">
+  <h2>Tambah Menu</h2>
+  <form
+    action="{{ url_for('tambah_menu', toko_id=toko_id) }}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <input type="text" name="nama_menu" placeholder="Nama" required />
+    <input type="text" name="harga" placeholder="Harga" required />
+    <input type="text" name="deskripsi" placeholder="Deskripsi" required />
+    <div>
+      <label>Pilih Gambar Menu </label>
+      <input
+        type="file"
+        name="img_menu"
+        id="fileInput"
+        class="form-control"
+        required
+      />
+    </div>
+    <input type="submit" name="submit" class="btn btn-success" value="UPLOAD" />
+  </form>
+  <a href="{{ url_for('detail_toko', id=toko_id) }}">Kembali</a>
+</section>
+{% endblock %}
