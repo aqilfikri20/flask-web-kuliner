@@ -21,7 +21,7 @@ cloudinary.config(
 db_config = {
     "host": "localhost",
     "user": "root",
-    "password": "",
+    "password": "12345678",
     "database": "kuliner_db",
     "cursorclass": pymysql.cursors.DictCursor
 }
@@ -35,9 +35,13 @@ def hash_password(password):
 
 
 def verify_password(stored_password, input_password):
-    salt, hashed_password = stored_password.split(':')
-    salt = bytes.fromhex(salt)
-    return hashlib.sha256(salt + input_password.encode('utf-8')).hexdigest() == hashed_password
+    try:
+        salt_hex, expected_hash = stored_password.split(':', 1)
+        salt = bytes.fromhex(salt_hex)
+    except (AttributeError, ValueError):
+        return False
+    actual_hash = hashlib.sha256(salt + input_password.encode('utf-8')).hexdigest()
+    return actual_hash == expected_hash
 
 
 def get_connection():
@@ -88,7 +92,7 @@ def about():
 
 @app.route("/input_filter")
 def input_filter():
-    return render_template("input_filter.html")
+    return redirect(url_for("home"))
 
 
 @app.route("/page_login", methods=["GET", "POST"])
@@ -121,7 +125,7 @@ def logout():
 
 @app.route("/admin")
 def admin():
-    return render_template("admin.html")
+    return redirect(url_for("page_login"))
 
 
 @app.route("/")
@@ -138,7 +142,7 @@ def home():
         data = cursor.fetchall()
     conn.close()
 
-    return render_template("index.html", data=data)
+    return render_template("index.html", data=data, search_query=search_query)
 
 
 @app.route('/toko', methods=['GET', 'POST'])
@@ -224,7 +228,7 @@ def edit_menu(id):
             harga = request.form['harga']
             deskripsi = request.form['deskripsi']
 
-            img_url = request.form['existing_img']
+            img_url = request.form.get('existing_img', '')
             if 'img_menu' in request.files and request.files['img_menu'].filename != '':
                 file = request.files['img_menu']
                 upload_result = cloudinary.uploader.upload(file)
@@ -259,6 +263,10 @@ def detail_toko(id):
         cursor.execute("SELECT * FROM table_toko WHERE id = %s", (id,))
         toko = cursor.fetchone()
 
+        if not toko:
+            conn.close()
+            return redirect(url_for('home'))
+
         cursor.execute("SELECT * FROM table_menu WHERE toko_id = %s", (id,))
         menu = cursor.fetchall()
     conn.close()
@@ -271,7 +279,11 @@ def delete_menu(id):
     conn = get_connection()
     with conn.cursor() as cursor:
         cursor.execute("SELECT toko_id FROM table_menu WHERE id = %s", (id,))
-        toko_id = cursor.fetchone()['toko_id']
+        menu = cursor.fetchone()
+        if not menu:
+            conn.close()
+            return redirect(url_for('home'))
+        toko_id = menu['toko_id']
 
         cursor.execute("DELETE FROM table_menu WHERE id = %s", (id,))
         conn.commit()
@@ -284,7 +296,7 @@ def rupiah_format(value):
     try:
         value = int(value)
         return f"Rp{value:,.0f}".replace(",", ".")
-    except ValueError:
+    except (TypeError, ValueError):
         return value
 
 

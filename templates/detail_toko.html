@@ -50,17 +50,11 @@
         </div>
 
         {% if session.logged_in %}
-        <div>
-          <a
-            href="{{ url_for('edit_toko', id=toko['id']) }}"
-            class="btn btn-primary"
-            >Edit Toko</a
-          >
-          <a
-            href="{{ url_for('delete_toko', id=toko['id']) }}"
-            class="btn btn-danger"
-            >Hapus Toko</a
-          >
+        <div class="shop-actions">
+          <a href="{{ url_for('edit_toko', id=toko['id']) }}" class="action-button action-edit">Edit toko</a>
+          <form action="{{ url_for('delete_toko', id=toko['id']) }}" method="POST">
+            <button type="submit" class="action-button action-delete">Hapus toko</button>
+          </form>
         </div>
         {% endif %}
       </div>
@@ -82,18 +76,12 @@
             <p>{{ menu_item['deskripsi'] }}</p>
 
             {% if session.logged_in %}
-            <a
-              href="{{ url_for('edit_menu', id=menu_item['id']) }}"
-              class="btn btn-warning"
-              >Edit</a
-            >
-            <form
-              action="{{ url_for('delete_menu', id=menu_item['id']) }}"
-              method="POST"
-              style="display: inline"
-            >
-              <button class="btn btn-danger">Hapus</button>
-            </form>
+            <div class="menu-actions">
+              <a href="{{ url_for('edit_menu', id=menu_item['id']) }}" class="action-button action-edit">Edit menu</a>
+              <form action="{{ url_for('delete_menu', id=menu_item['id']) }}" method="POST">
+                <button type="submit" class="action-button action-delete">Hapus</button>
+              </form>
+            </div>
             {% endif %}
           </div>
           {% endfor %}

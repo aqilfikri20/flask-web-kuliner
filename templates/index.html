@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Kuliner Lhokseumawe</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -76,7 +76,11 @@
     </header>
     {% block content %}
 
-    <h2>Toko Kuliner Lhokseumawe</h2>
+    <section class="home-intro">
+      <span class="home-eyebrow">RASA LOKAL, CERITA ISTIMEWA</span>
+      <h1>Jelajahi Kuliner Lhokseumawe</h1>
+      <p>Temukan tempat makan favorit dan cita rasa khas di sekitar Anda.</p>
+    </section>
     <div class="toko-list">
       {% for toko in data %}
       <div class="toko-item">
@@ -90,30 +94,16 @@
           >
           <p class="spec">Lokasi : {{ toko['lokasi'] }}</p>
         </div>
-        {% if session.logged_in %}
-        <div class="under">
-          <a href="{{ url_for('edit_toko', id=toko['id']) }}">
-            <button class="toko-edit">Edit</button>
-          </a>
-          {%else%}
-          <div class="detail-toko">
-            <a href="{{ url_for('detail_toko', id=toko['id']) }}">
-              <button class="button-detail">Detail</button>
-            </a>
-          </div>
-
-          {% endif %} {% if session.logged_in %}
-          <form
-            action="{{ url_for('delete_toko', id=toko['id']) }}"
-            method="POST"
-            style="display: inline"
-          >
-            <button class="toko-item__delete">
-              <i class="fas fa-trash"></i>
-            </button>
+        <div class="toko-actions">
+          {% if session.logged_in %}
+          <a class="action-button action-edit" href="{{ url_for('edit_toko', id=toko['id']) }}">Edit</a>
+          <form action="{{ url_for('delete_toko', id=toko['id']) }}" method="POST">
+            <button type="submit" class="action-button action-delete"><i class="fas fa-trash-alt" aria-hidden="true"></i><span>Hapus</span></button>
           </form>
+          {% else %}
+          <a class="action-button action-detail" href="{{ url_for('detail_toko', id=toko['id']) }}">Lihat detail <span aria-hidden="true">→</span></a>
+          {% endif %}
         </div>
-        {% endif %}
       </div>
       {%endfor%}
     </div>
